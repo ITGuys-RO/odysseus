@@ -9,6 +9,13 @@ name: ci / docker publish
 # Registry: ghcr.io/<owner>/<repo>.
 
 on:
+  # FORK ADDITION. This fork exists to rebuild a PINNED upstream commit on demand, not to
+  # develop in. `push` alone cannot serve that: re-pointing `main` at a SHA by deleting and
+  # recreating the branch produces a push with no computable diff, so the `paths-ignore`
+  # filter below matches nothing and the workflow is skipped. Dispatching sidesteps the
+  # filter entirely. Tagging still keys off `github.ref`, so a dispatch on `main` tags
+  # :latest + :APP_VERSION exactly as a push to main would.
+  workflow_dispatch:
   push:
     branches: [dev, main]
     paths-ignore:
