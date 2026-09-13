@@ -81,6 +81,22 @@ jobs:
         with:
           context: .
           platforms: ${{ matrix.platform }}
+          # FORK ADDITION, but a genuine upstream bug: nothing here ever set image labels.
+          # metadata-action runs only in the `merge` job and only its `tags` output is used,
+          # so every arch image was published with an EMPTY config — `total labels: 0`.
+          #
+          # GHCR derives a package's "Source" repository link from this exact label, NOT
+          # from which repository pushed the image. Without it a package keeps whatever link
+          # it had when it was first created, and no amount of pushing from elsewhere moves
+          # it. Upstream never notices because their package was created by the same repo
+          # that pushes it, so the link is correct by accident; this fork inherited a package
+          # created by a now-retired build repo and was therefore stuck pointing at it.
+          #
+          # github.repository is case-preserved (`ITGuys-RO/odysseus`), which is correct and
+          # wanted here — this is a github.com URL, not an OCI ref, so it is not subject to
+          # the lowercase rule that forced the IMAGE_NAME workaround above.
+          labels: |
+            org.opencontainers.image.source=${{ github.server_url }}/${{ github.repository }}
           outputs: type=image,name=${{ env.REGISTRY }}/${{ env.IMAGE_NAME }},push-by-digest=true,name-canonical=true,push=true
           cache-from: type=gha,scope=${{ matrix.arch }}
           cache-to: type=gha,mode=max,scope=${{ matrix.arch }}
