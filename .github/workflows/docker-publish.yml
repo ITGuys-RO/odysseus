@@ -54,6 +54,16 @@ jobs:
             arch: arm64
             runner: ubuntu-24.04-arm
     steps:
+      # FORK ADDITION. github.repository preserves the owner's case, and this fork lives
+      # under `ITGuys-RO` — so `ghcr.io/${{ github.repository }}` is `ghcr.io/ITGuys-RO/odysseus`,
+      # which buildx rejects at the export stage, AFTER a full successful build:
+      #   ERROR: failed to parse ref "ghcr.io/ITGuys-RO/odysseus": invalid reference format:
+      #   repository name (ITGuys-RO/odysseus) must be lowercase
+      # Upstream never hits this because `odysseus-dev` is already lowercase. Writing the
+      # lowered value to $GITHUB_ENV overrides the workflow-level env: for every LATER step,
+      # so all four existing ${{ env.IMAGE_NAME }} references stay as upstream wrote them.
+      - name: Lowercase the image name
+        run: echo "IMAGE_NAME=${GITHUB_REPOSITORY,,}" >> "$GITHUB_ENV"
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1  # v7.0.1
         with:
           persist-credentials: false
@@ -95,6 +105,16 @@ jobs:
       contents: read
       packages: write
     steps:
+      # FORK ADDITION. github.repository preserves the owner's case, and this fork lives
+      # under `ITGuys-RO` — so `ghcr.io/${{ github.repository }}` is `ghcr.io/ITGuys-RO/odysseus`,
+      # which buildx rejects at the export stage, AFTER a full successful build:
+      #   ERROR: failed to parse ref "ghcr.io/ITGuys-RO/odysseus": invalid reference format:
+      #   repository name (ITGuys-RO/odysseus) must be lowercase
+      # Upstream never hits this because `odysseus-dev` is already lowercase. Writing the
+      # lowered value to $GITHUB_ENV overrides the workflow-level env: for every LATER step,
+      # so all four existing ${{ env.IMAGE_NAME }} references stay as upstream wrote them.
+      - name: Lowercase the image name
+        run: echo "IMAGE_NAME=${GITHUB_REPOSITORY,,}" >> "$GITHUB_ENV"
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1  # v7.0.1
         with:
           persist-credentials: false
