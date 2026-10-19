@@ -31,7 +31,7 @@ jobs:
     name: dependency-review (PR gate)
     # Only meaningful on a pull request -- it needs a base..head diff to review.
     if: github.event_name == 'pull_request'
-    runs-on: ubuntu-latest
+    runs-on: arc-itguys-ro-odysseus
     permissions:
       contents: read
     steps:
@@ -48,7 +48,7 @@ jobs:
 
   pip-audit:
     name: pip-audit (advisory)
-    runs-on: ubuntu-latest
+    runs-on: arc-itguys-ro-odysseus
     # Advisory: report known-vulnerable Python deps without blocking the merge.
     continue-on-error: true
     permissions:

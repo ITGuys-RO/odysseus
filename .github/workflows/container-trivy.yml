@@ -49,7 +49,7 @@ jobs:
   scan:
     name: Trivy (image scan, advisory)
     if: github.event_name != 'push'
-    runs-on: ubuntu-latest
+    runs-on: arc-itguys-ro-odysseus
     # Advisory: a CVE in an upstream package must not block a PR.
     continue-on-error: true
     permissions:
@@ -90,7 +90,7 @@ jobs:
   publish:
     name: Trivy (image scan + SARIF upload)
     if: github.event_name == 'push'
-    runs-on: ubuntu-latest
+    runs-on: arc-itguys-ro-odysseus
     continue-on-error: true
     permissions:
       contents: read

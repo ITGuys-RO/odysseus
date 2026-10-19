@@ -49,7 +49,7 @@ jobs:
         include:
           - platform: linux/amd64
             arch: amd64
-            runner: ubuntu-latest
+            runner: arc-itguys-ro-odysseus
           - platform: linux/arm64
             arch: arm64
             runner: ubuntu-24.04-arm
@@ -118,7 +118,7 @@ jobs:
 
   merge:
     name: merge manifest + tag
-    runs-on: ubuntu-latest
+    runs-on: arc-itguys-ro-odysseus
     needs: build
     permissions:
       contents: read

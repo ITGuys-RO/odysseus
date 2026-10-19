@@ -31,7 +31,7 @@ concurrency:
 jobs:
   actionlint:
     name: actionlint
-    runs-on: ubuntu-latest
+    runs-on: arc-itguys-ro-odysseus
     permissions:
       contents: read
     steps:
@@ -56,7 +56,7 @@ jobs:
 
   zizmor:
     name: zizmor (Actions SAST)
-    runs-on: ubuntu-latest
+    runs-on: arc-itguys-ro-odysseus
     permissions:
       contents: read
     steps:

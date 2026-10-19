@@ -18,7 +18,7 @@ jobs:
   focused-test-guidance:
     name: Focused test guidance (report-only)
     if: github.event_name == 'pull_request'
-    runs-on: ubuntu-latest
+    runs-on: arc-itguys-ro-odysseus
     continue-on-error: true
     steps:
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1  # v7.0.1
@@ -71,7 +71,7 @@ jobs:
 
   python-syntax:
     name: Python syntax (compileall)
-    runs-on: ubuntu-latest
+    runs-on: arc-itguys-ro-odysseus
     steps:
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1  # v7.0.1
         with:
@@ -84,7 +84,7 @@ jobs:
 
   node-syntax:
     name: JS syntax (node --check)
-    runs-on: ubuntu-latest
+    runs-on: arc-itguys-ro-odysseus
     steps:
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1  # v7.0.1
         with:
@@ -102,7 +102,7 @@ jobs:
 
   python-tests:
     name: Python tests (pytest)
-    runs-on: ubuntu-latest
+    runs-on: arc-itguys-ro-odysseus
     # Make Python test validation authoritative for the configured scope.
     steps:
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1  # v7.0.1

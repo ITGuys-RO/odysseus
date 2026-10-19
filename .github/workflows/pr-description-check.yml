@@ -19,7 +19,7 @@ permissions: {}
 jobs:
   check-description:
     name: Check PR description
-    runs-on: ubuntu-latest
+    runs-on: arc-itguys-ro-odysseus
     permissions:
       contents: read
       pull-requests: write
@@ -39,7 +39,7 @@ jobs:
 
   check-title:
     name: Check PR title (Conventional Commits)
-    runs-on: ubuntu-latest
+    runs-on: arc-itguys-ro-odysseus
     permissions: {}
     # Skip bots: they open PRs programmatically and have their own process.
     if: github.event.pull_request.user.type != 'Bot'
@@ -64,7 +64,7 @@ jobs:
   check-mergeable:
     name: Flag unmergeable PRs
     needs: check-description
-    runs-on: ubuntu-latest
+    runs-on: arc-itguys-ro-odysseus
     permissions:
       pull-requests: write
       issues: write

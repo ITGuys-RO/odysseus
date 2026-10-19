@@ -17,7 +17,7 @@ concurrency:
 jobs:
   build:
     name: Package static site
-    runs-on: ubuntu-latest
+    runs-on: arc-itguys-ro-odysseus
     permissions:
       contents: read
       pages: read
@@ -37,7 +37,7 @@ jobs:
   deploy:
     name: Deploy static site
     needs: build
-    runs-on: ubuntu-latest
+    runs-on: arc-itguys-ro-odysseus
     permissions:
       pages: write
       id-token: write

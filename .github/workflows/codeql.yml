@@ -16,7 +16,7 @@ permissions:
 jobs:
   analyze:
     name: Analyze (${{ matrix.language }})
-    runs-on: ubuntu-latest
+    runs-on: arc-itguys-ro-odysseus
     permissions:
       security-events: write
       actions: read
